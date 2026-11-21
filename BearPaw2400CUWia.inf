@@ -1,0 +1,61 @@
+[Version]
+Signature   = "$Windows NT$"
+Class       = Image
+ClassGuid   = {6BDD1FC6-810F-11D0-BEC7-08002BE2092F}
+Provider    = %Provider%
+DriverVer   = 11/21/2026,0.1.0.1
+CatalogFile = BearPaw2400CUWia.cat
+PnpLockdown = 1
+
+[Manufacturer]
+%Provider% = Models,NTamd64
+
+[Models.NTamd64]
+%ScannerName% = BearPaw.Install,USB\VID_05D8&PID_4002&REV_0100
+
+[BearPaw.Install]
+Include      = sti.inf,winusb.inf
+Needs        = STI.MICRODRIVERSection,WINUSB.NT
+SubClass     = StillImage
+DeviceType   = 1
+Capabilities = 0x30
+PortSelect   = NO
+DeviceData   = BearPaw.DeviceData
+AddReg       = BearPaw.StiRegistry
+CopyFiles    = BearPaw.CopyFiles
+
+[BearPaw.Install.Services]
+Include = winusb.inf
+Needs   = WINUSB.NT.Services
+
+[BearPaw.Install.HW]
+AddReg = BearPaw.UsbRegistry
+
+[BearPaw.UsbRegistry]
+HKR,,DeviceInterfaceGUIDs,0x00010000,"{3BDA9676-AFB4-4502-A0FE-7D356F3C7609}"
+HKR,,Security,0x00000000,"D:P(A;;GA;;;SY)(A;;GA;;;BA)(A;;GRGW;;;IU)(A;;GRGW;;;LS)"
+
+[BearPaw.StiRegistry]
+HKR,,CreateFileName,0x00000000,"AUTO"
+HKR,,HardwareConfig,0x00010001,4
+
+[BearPaw.DeviceData]
+Server      = Local
+MicroDriver = "BearPaw2400CUWia.dll"
+
+[DestinationDirs]
+BearPaw.CopyFiles = 11
+
+[BearPaw.CopyFiles]
+BearPaw2400CUWia.dll
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[SourceDisksFiles]
+BearPaw2400CUWia.dll = 1
+
+[Strings]
+Provider    = "BearPaw 2400 CU project"
+ScannerName = "Mustek BearPaw 2400 CU"
+DiskName    = "BearPaw 2400 CU WIA driver"

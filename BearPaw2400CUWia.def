@@ -1,0 +1,5 @@
+LIBRARY BearPaw2400CUWia
+EXPORTS
+    MicroEntry
+    Scan
+    SetPixelWindow
